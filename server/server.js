@@ -7,7 +7,8 @@ import {
   addUserToRoom,
   checkReplay,
   storeEvent,
-  getRecentRoomEvents
+  getRecentRoomEvents,
+  registerUserPublicKey
 } from "./db.js";
 
 import {
@@ -81,6 +82,42 @@ wss.on("connection", (ws) => {
         type: "error",
         error: "Invalid JSON"
       });
+      return;
+    }
+
+    if (packet.type === "user.register") {
+      if (
+        packet &&
+        packet.version === 1 &&
+        typeof packet.username === "string" &&
+        typeof packet.public_key === "string"
+      ) {
+        const result = registerUserPublicKey(
+          packet.username,
+          packet.public_key
+        );
+
+        if (!result.ok) {
+          sendJson(ws, {
+            type: "error",
+            error: result.error
+          });
+          return;
+        }
+
+        sendJson(ws, {
+          type: "server.registered",
+          username: packet.username
+        });
+
+        return;
+      }
+
+      sendJson(ws, {
+        type: "error",
+        error: "Invalid registration packet"
+      });
+
       return;
     }
 

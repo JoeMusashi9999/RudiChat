@@ -157,3 +157,29 @@ export function getRecentRoomEvents(roomId, limit = 50) {
     LIMIT ?
   `).all(roomId, limit).reverse();
 }
+
+export function registerUserPublicKey(username, publicKey) {
+  const existing = db.prepare(`
+    SELECT * FROM users WHERE username = ?
+  `).get(username);
+
+  if (existing && existing.public_key) {
+    return {
+      ok: false,
+      error: "User already has a public key registered"
+    };
+  }
+
+  const user = getOrCreateUser(username, publicKey);
+
+  db.prepare(`
+    UPDATE users
+    SET public_key = ?
+    WHERE id = ?
+  `).run(publicKey, user.id);
+
+  return {
+    ok: true,
+    user
+  };
+}
