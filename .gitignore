@@ -1,5 +1,5 @@
 .env
-chat.db
-chat.db-shm
-chat.db-wal
+*.db
+*.db-shm
+*.db-wal
 client-keys.json
