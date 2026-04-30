@@ -17,6 +17,8 @@ import {
   canonicalizePacketForSigning
 } from "./crypto.js";
 
+import "dotenv/config";
+
 const PORT = process.env.PORT || 8080;
 const SERVER_TEST_KEY = process.env.CHAT_TEST_KEY;
 
