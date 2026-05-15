@@ -1,0 +1,28 @@
+{
+  "type": "module",
+  "name": "rudichat",
+  "version": "1.0.0",
+  "description": "Weird code salad Theoretically I want the service to work like this: Client and server already know each other's public keys         ↓ Client sends auth packet + ephemeral public key         ↓ Server verifies password/auth         ↓ Server sends its ephemeral public key         ↓ Both sides independently derive the same session key         ↓ No session key is ever transmitted",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoeMusashi9999/RudiChat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoeMusashi9999/RudiChat/issues"
+  },
+  "homepage": "https://github.com/JoeMusashi9999/RudiChat#readme",
+  "dependencies": {
+    "better-sqlite3": "^12.10.0",
+    "dotenv": "^17.4.2",
+    "libsodium-wrappers": "^0.8.4",
+    "uuid": "^14.0.0",
+    "ws": "^8.20.1"
+  }
+}

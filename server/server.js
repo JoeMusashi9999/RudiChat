@@ -15,9 +15,22 @@ import {
   verifySignature,
   decryptPayload,
   canonicalizePacketForSigning
-} from "./crypto.js";
+} from "../crypto.js";
 
-import "dotenv/config";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({
+  path: path.join(__dirname, "../.env")
+});
+
+// Log the loaded CHAT_TEST_KEY for debugging purposes
+console.log("CHAT_TEST_KEY loaded:", process.env.CHAT_TEST_KEY?.slice(0, 8));
+
 
 const PORT = process.env.PORT || 8080;
 const SERVER_TEST_KEY = process.env.CHAT_TEST_KEY;

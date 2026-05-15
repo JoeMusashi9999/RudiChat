@@ -9,6 +9,11 @@ import {
     canonicalizePacketForSigning
 } from "./crypto.js";
 
+import "dotenv/config";
+
+// Log the loaded CHAT_TEST_KEY for debugging purposes
+console.log("CHAT_TEST_KEY loaded:", process.env.CHAT_TEST_KEY?.slice(0, 8));
+
 const SERVER_URL = process.env.SERVER_URL || "ws://localhost:8080";
 const CHAT_TEST_KEY = process.env.CHAT_TEST_KEY;
 
